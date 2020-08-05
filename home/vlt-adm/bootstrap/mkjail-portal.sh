@@ -102,7 +102,6 @@ jexec ${JAIL} /usr/sbin/pwd_mkdb -p /etc/master.passwd
 # No need to verify if already done
 /bin/echo "Installing packages into jail... Please be patient"
 
-/usr/sbin/pkg -j ${JAIL} install -y py37-virtualenv || (/bin/echo "Fail !" ; exit 1)
 /usr/sbin/pkg -j ${JAIL} install -y wget || (/bin/echo "Fail !" ; exit 1)
 /usr/sbin/pkg -j ${JAIL} install -y apache24 || (/bin/echo "Fail !" ; exit 1)
 /usr/sbin/pkg -j ${JAIL} install -y ap24-py37-mod_wsgi || (/bin/echo "Fail !" ; exit 1)
@@ -144,7 +143,7 @@ touch /home/vlt-os/vulture_os/vulture_os/secret_key.py
 # Stop darwin & netdata to prevent use of binary python
 /usr/sbin/service darwin stop
 /usr/sbin/service netdata stop
-/usr/local/bin/virtualenv-3.7 --no-pip --no-wheel --no-setuptools /home/vlt-os/env
+/usr/local/bin/python3.7 -m venv --copies /home/vlt-os/env
 /usr/sbin/service netdata start
 /usr/sbin/service darwin start
 
